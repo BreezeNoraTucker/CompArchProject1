@@ -1,0 +1,12 @@
+I did not have the time to test these circuits, just getting them to 
+compile took a significant amount of time.
+Getting inout coercion warnings, unsure why those are being caused,
+and if that is a genuine issue.
+Had several syntax struggle points, for example figuring out that a 
+variable 
+could not have a name beginning with an integer took longer than 
+I would like to admit.
+Attempted to use loops to get around need to copy paste so many lines,
+could not figure out that syntax. Ended up using python scripts to 
+generate
+repeated lines for iterated indexes. 
