@@ -3,17 +3,14 @@
 
 module halfAdder_tb;
 
-reg a;
-reg b;
-reg cin;
+input a;
+input b;
+//cin;
 wire out;
-reg cout;
+wire cout;
 
-//reg half;
-//reg full;
-//reg twenty;
 
-halfAdder out(a,b,out,cout)
+halfAdder Adder(a,b,out,cout);
 
 initial begin
 
@@ -22,7 +19,7 @@ initial begin
 
     a = 20'b00000000000000000000;
     b = 20'b11111111111111111111;
-    c = 0;
+    //cin = 0;
     #10;
 
     $display("test complete");
