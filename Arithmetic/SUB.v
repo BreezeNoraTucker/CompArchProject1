@@ -11,7 +11,8 @@ module compliment(input [19:0] a, output wire [19:0] out);
 endmodule;
 
 
-module sub(input [19:0] a, input [19:0] b, output wire [19:0] out, output wire cout);
-    //assign comp = compliment here
-    add20 Adder(a,comp,out,cout);
+module subtraction(input [19:0] a, input [19:0] b, output wire [19:0] out, output wire cout);
+    wire [19:0] comp;
+    compliment Comp(a,comp);
+    add20 Adder(b,comp,out,cout);
 endmodule;
