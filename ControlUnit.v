@@ -2,9 +2,10 @@
 module intrFetch(input [19:0] idx, input [31:0][19:0] mem, output [19:0]instr);
     wire [4:0]sel;
     assign sel = idx[4:0];
-    MUX MUX(mem, sel, instr);
+    MUX m(mem, sel, instr);
 endmodule
-module instrDecode(input [19:0] instr, output TODO);
+module instrDecode(input [19:0] instr, input [31:0][19:0] regArr, 
+            input [31:0] regWE, output TODO);
     wire [4:0]opcode;
     wire [4:0]addrA;
     wire [4:0]addrB;
@@ -19,5 +20,15 @@ module instrDecode(input [19:0] instr, output TODO);
     //fetch input words from memory using addresses
     
 
-
+    //route the three words acording to the opcode
+    wire [31:0][19:0]targetsA; //possible input locations for A
+    wire [31:0][19:0]targetsB; //possible input locations for B
+    wire [31:0][19:0]sourcesW; //possible source locations for W
+    
+    
+    DEMUX demuxA(wordA, opcode, targetsA);
+    DEMUX demuxB(wordB, opcode, targetsB);
+    MUX muxW(sourcesW, opcode, wordW);
+    DEMUX demuxW(wordW, addrW, regArr);
+    DECODE enableWrite(addrW, regWE);
 endmodule
