@@ -45,7 +45,7 @@ module DEMUX (input [19:0] a, input [4:0] sel, output [31:0][19:0] out);
         end
     endgenerate
     */
-    assign out[idx] = a;
+    assign out[idx][i] = a;
 endmodule
 module ENCODE (input [31:0] in, output [4:0] out);
     //5 bit encoder
