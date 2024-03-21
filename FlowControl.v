@@ -8,7 +8,6 @@ module MUX(input [31:0] in, input [4:0] sel, output reg out);
 endmodule
 */
 
-
 module MUX
 (input [31:0][19:0] a, input [4:0] sel, output wire [19:0] out);    
     //32 channels by 20 bits, so 5 bit selector
@@ -47,6 +46,7 @@ module DEMUX (input [19:0] a, input [4:0] sel, output [31:0][19:0] out);
     */
     assign out[idx][i] = a;
 endmodule
+
 module ENCODE (input [31:0] in, output [4:0] out);
     //5 bit encoder
     //signal in nth channel -> 5 bit int
@@ -60,9 +60,6 @@ module ENCODE (input [31:0] in, output [4:0] out);
         |in[24]|in[25]|in[26]|in[27]|in[28]|in[29]|in[30]|in[31];
     assign out[4] = in[16]|in[17]|in[18]|in[19]|in[20]|in[21]|in[22]|in[23]
         |in[24]|in[25]|in[26]|in[27]|in[28]|in[29]|in[30]|in[31];
-
-    
-
 endmodule
 
 module DECODE (input [4:0] in, output [31:0] out);
