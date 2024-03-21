@@ -24,7 +24,7 @@ initial begin
     #10;
 
     a = 20'b01010101010101010101;
-    #10;
+    #20;
 
     $display("test complete");
     $finish;
@@ -39,14 +39,16 @@ module sub_tb;
 
 reg [19:0] a;
 reg [19:0] b;
+wire [19:0] c;
 wire [19:0] out;
 wire cout;
 
 subtraction Subtract(a,b,out,cout);
+compliment Comp(a,c);
 
 initial begin
 
-    $dumpfile("SUBTRACT.vcd");
+    $dumpfile("SUB.vcd");
     $dumpvars(0, sub_tb);
 
     a = 20'b00000000000000000001;

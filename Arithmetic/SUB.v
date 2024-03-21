@@ -13,6 +13,8 @@ endmodule;
 
 module subtraction(input [19:0] a, input [19:0] b, output wire [19:0] out, output wire cout);
     wire [19:0] comp;
+    wire [19:0] compout;
     compliment Comp(a,comp);
-    add20 Adder(b,comp,out,cout);
+    add20 Adder(b,comp,compout,cout);
+    compliment Compl(compout,out);
 endmodule;
