@@ -18,7 +18,8 @@ module instrDecode(input [19:0] instr, input [31:0][19:0] regArr,
     wire [19:0] wordB; //input B, from addrB
     wire [19:0] wordW; //output, written to addrW
     //fetch input words from memory using addresses
-    
+    MUX muxA(regArr, addrA, wordA);
+    MUX muxB(regArr, addrB, wordB);
 
     //route the three words acording to the opcode
     wire [31:0][19:0]targetsA; //possible input locations for A
@@ -31,4 +32,7 @@ module instrDecode(input [19:0] instr, input [31:0][19:0] regArr,
     MUX muxW(sourcesW, opcode, wordW);
     DEMUX demuxW(wordW, addrW, regArr);
     DECODE enableWrite(addrW, regWE);
+
+
+    
 endmodule
