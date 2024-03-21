@@ -1,5 +1,5 @@
 `timescale 1ns / 1ns
-`include "FlowControl.v"
+`include "../FlowControl.v"
 
 // MUX TESTBENCH
 module MUX_tb;
