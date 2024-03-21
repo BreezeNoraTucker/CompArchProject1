@@ -1,7 +1,6 @@
 `timescale 1ns / 1ns
 `include "SUB.v"
 
-
 // 20-BIT COMPLIMENT
 module compliment_tb;
 
@@ -32,7 +31,7 @@ initial begin
 
 end
 
-endmodule;
+endmodule
 
 
 // 20-BIT SUBTRACTION
@@ -43,11 +42,11 @@ reg [19:0] b;
 wire [19:0] out;
 wire cout;
 
-subtraction Sub(a,b,out,cout);
+subtraction Subtract(a,b,out,cout);
 
 initial begin
 
-    $dumpfile("SUB.vcd");
+    $dumpfile("SUBTRACT.vcd");
     $dumpvars(0, sub_tb);
 
     a = 20'b00000000000000000001;
@@ -75,5 +74,5 @@ initial begin
 
 end
 
-endmodule;
+endmodule
     
