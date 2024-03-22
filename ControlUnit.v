@@ -4,7 +4,7 @@ module intrFetch(input [19:0] idx, input [31:0][19:0] mem, output [19:0]instr);
     wire [4:0]sel;
     assign sel = idx[4:0];
     //replace this with a load from mem once complete
-    MUX m(mem, sel, instr);
+    MUX m(mem, sel, instr); //replace this with a load from mem once complete
 endmodule
 module instrDecode(input [19:0] instr, input [31:0][19:0] regArr, 
             input [31:0][19:0] sourcesW, 

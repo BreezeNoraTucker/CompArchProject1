@@ -14,5 +14,5 @@ module CU_tb():
 
     intrFetch fetch(instrIdx, mem, instr);
     instrDecode decode(instr, regArr, W, A, B, regWE, regArrW);
-
+    
 endmodule
