@@ -5,7 +5,8 @@ module intrFetch(input [19:0] idx, input [31:0][19:0] mem, output [19:0]instr);
     MUX m(mem, sel, instr);
 endmodule
 module instrDecode(input [19:0] instr, input [31:0][19:0] regArr, 
-            input [31:0] regWE, output TODO);
+            output [31:0] regWE, output [31:0][19:0] regArrW, 
+            output TODO);
     wire [4:0]opcode;
     wire [4:0]addrA;
     wire [4:0]addrB;
@@ -30,9 +31,7 @@ module instrDecode(input [19:0] instr, input [31:0][19:0] regArr,
     DEMUX demuxA(wordA, opcode, targetsA);
     DEMUX demuxB(wordB, opcode, targetsB);
     MUX muxW(sourcesW, opcode, wordW);
-    DEMUX demuxW(wordW, addrW, regArr);
+    DEMUX demuxW(wordW, addrW, regArrW);
     DECODE enableWrite(addrW, regWE);
-
-
     
 endmodule
