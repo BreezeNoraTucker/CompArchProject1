@@ -42,7 +42,7 @@ module SWAP (input [19:0] data1, input [19:0] data2, output reg [19:0] result1, 
         end
     end
 endmodule
-
+/*
 module SHFTR (input [19:0] data, input [4:0] amount, output reg [19:0] result);
     always @* begin
         if (amount < 20)
@@ -87,3 +87,4 @@ module SWAP (input [19:0] data1, input [19:0] data2, output reg [19:0] result1, 
         end
     end
 endmodule
+*/
