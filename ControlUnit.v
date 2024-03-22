@@ -29,11 +29,9 @@ module instrDecode(input [19:0] instr, input [31:0][19:0] regArr,
     //wire [31:0][19:0]targetsB; //possible input locations for B
     //wire [31:0][19:0]sourcesW; //possible source locations for W
     
-    
     DEMUX demuxA(wordA, opcode, targetsA);
     DEMUX demuxB(wordB, opcode, targetsB);
     MUX muxW(sourcesW, opcode, wordW);
     DEMUX demuxW(wordW, addrW, regArrW);
     DECODE enableWrite(addrW, regWE);
-    
 endmodule
