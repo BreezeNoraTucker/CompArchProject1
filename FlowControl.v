@@ -16,7 +16,7 @@ module MUX
     integer idx;
     always @(a) begin
         idx = $unsigned(sel);
-        $display("idx=%0d",idx);
+        //$display("idx=%0d",idx);
     end
     */
     //wire [31:0][19:0] tmp;
@@ -75,7 +75,7 @@ module DEMUX (input [19:0] a, input [4:0] sel, output [31:0][19:0] out);
     end
     */
     
-    assign out[idx] = a;
+    //assign out[idx] = a;
 endmodule
 
 module ENCODE (input [31:0] in, output [4:0] out);
