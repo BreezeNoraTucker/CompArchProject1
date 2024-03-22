@@ -1,12 +1,12 @@
 `include "./Logic.v"
 //`include "./BitShifts.v"
 //BitShifts.v currently does not compile
-`include "ADD.v"
-`include "INC.v"
+`include "Arithmetic.v"
 module opPaths(input [31:0][19:0] A, input [31:0][19:0] B,
             output [31:0][19:0] W);
-    wire carry;
-    
+    wire carry[3:0];
+    wire zero[3:0];
+    wire sign[3:0];
     //TRAP:0
     assign A[0] = 20'b00000000000000000000;
 
@@ -42,7 +42,23 @@ module opPaths(input [31:0][19:0] A, input [31:0][19:0] B,
     //currently only support one write
     */
     //INC:17
-    twentyBitInc op17(A[17], W[17], carry);
-    assign b[17] =  20'b00000000000000000000;
+    twentyBitInc op17(A[17], W[17], carry[0]);
+    assign B[17] =  20'b00000000000000000000;
+    //DEC:18
+    dec op18(A[18], W[18], carry[1]);
+    assign B[18] = 20'b00000000000000000000;
+    //ADD:19
+    add20 op19(A[19], B[19], W[19], carry[2]);
+    //ADDC:20
+    //no requirement
+    //SUB: 21
+    subtraction op21(A[21], B[21], W[21], carry[3]);
+    //EQ: 22
+    EQ op22(A[22], B[22], zero[0]);
+    //GT: 23
+    GT op23(A[23], B[23], sign[0]);
+    //LT:24
+    LT op24(A[24], B[24], sign[1]);
+    
 
 endmodule
