@@ -16,6 +16,7 @@ module MUX
     integer idx;
     always @(a) begin
         idx = $unsigned(sel);
+        $display("idx=%0d",idx);
     end
     */
     //wire [31:0][19:0] tmp;
@@ -32,19 +33,49 @@ module MUX
 endmodule
 
 module DEMUX (input [19:0] a, input [4:0] sel, output [31:0][19:0] out);
-    //genvar i;
+    genvar i;
     integer idx;
     always @(a) begin
         idx = $unsigned(sel);
+        $display("idx=%0d",idx);
     end
+    
     /*
+    assign z = 20'b00000000000000000000;
     generate
         for(i = 0; i < 32; i = i + 1)begin
-            assign out[i] = (idx == i) & a[i];
+            assign out[i] = z;
         end
     endgenerate
     */
-    assign out[idx][i] = a;
+
+    /*
+    genvar j;
+    generate
+        for(i = 0; i < 32; i = i + 1)begin
+            //if (i == idx) begin
+                for(j = 0; i < 19; i = i + 1)begin
+                    assign out[i][j] = (idx == i) & a[j];
+                end
+            //end
+        end
+    endgenerate
+    */
+    
+
+
+    /*
+    always @(idx) begin
+        case(idx)
+            0: out[0] = a;
+            1: out[1] = a;
+            2: out[2] = a;
+            default: $display(":(");
+        endcase
+    end
+    */
+    
+    assign out[idx] = a;
 endmodule
 
 module ENCODE (input [31:0] in, output [4:0] out);

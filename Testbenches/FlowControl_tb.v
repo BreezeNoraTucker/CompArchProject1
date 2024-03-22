@@ -63,7 +63,47 @@ initial begin
     sel = 5'b11111;
     #10;
 
-    $display("test complete");
+    $finish;
+
+end
+
+endmodule
+
+
+
+// DEMUX TESTBENCH
+module DEMUX_tb;
+
+reg [19:0] a;
+reg [4:0] sel;
+wire [31:0][19:0] out;
+
+
+DEMUX demulti(a,sel,out);
+
+initial begin
+
+    $dumpfile("FlowControl.vcd");
+    $dumpvars(0, DEMUX_tb);
+    
+    a = 20'b11111111111111111111;
+
+    sel = 5'b00000;
+    #10;
+
+    sel = 5'b00001;
+    #10;
+    
+    sel = 5'b00010;
+    #10;
+
+    sel = 5'b00101;
+    #10;
+
+    //sel = 5'b11111;
+    //#10;
+
+    $display("out[0]=%0d and out[5]=%0d", out[0], out[5]);
     $finish;
 
 end
