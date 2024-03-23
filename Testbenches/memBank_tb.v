@@ -1,23 +1,23 @@
 `timescale 1ns / 1ns
 `include "../MemoryBank.v"
 
-// MEMORY BANK LOADING CONSTANT TESTBENCH
-module LDC_tb;
+// MEMORY BANK READING TESTBENCH
+module read_tb;
 
 reg [63:0][19:0] a;
-reg [19:0] C;
+//reg [19:0] C;
 reg [5:0] R;
+//reg clk;
 wire [19:0] out;
-wire [19:0] buff1;
-wire [19:0] buff2;
 
 
-LDC mem(a,C,R,out,buff1,buff2);
+
+read mem(a,R,out);
 
 initial begin
 
     $dumpfile("MemoryBank.vcd");
-    $dumpvars(0, LDC_tb);
+    $dumpvars(0, read_tb);
     a[0] = 20'b00000000000000000000;
     a[1] = 20'b00000000000000000001;
     a[2] = 20'b00000000000000000010;
@@ -83,7 +83,7 @@ initial begin
     a[62] = 20'b00000000000000111110;
     a[63] = 20'b00000000000000111111;
 
-    C = 20'b00000000000000000000;
+    //C = 20'b00000000000000000000;
 
     R = 6'b000000;
     #10;

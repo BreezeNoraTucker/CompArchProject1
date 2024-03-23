@@ -1,7 +1,34 @@
 `timescale 1ns / 1ns
 `include "../FlowControl.v"
+`include "../Register.v"
 
-module LDC (input [63:0][19:0] mem, input [19:0] C, input[5:0] R, output wire [19:0] out, output wire [19:0] buffer0, output wire [19:0] buffer1); 
+
+module memBank(input clk, output [63:0][19:0] mem);
+    //wire Q;
+    //wire notQ;
+    //mem[0] = ctrlFlipFlop(0,1,clk);
+    input D;
+    input WE;
+    input Q;
+    input notQ;
+
+    genvar i;
+    genvar j;
+    generate
+        for(i = 0; i < 64; i = i + 1)begin
+            for(j = 0; j < 20; j = j + 1)begin
+                ctrlFlipFlop flip(D,WE,clk,Q,notQ);
+                mem[i][j] = flip
+            end
+        end
+    endgenerate
+endmodule
+
+//module changeR(input [63:0][19:0] mem, input I, input J, input D, input WE, input clk, output Q, output notQ);\
+    //mem
+
+
+module read(input [63:0][19:0] mem, input[5:0] R, output wire [19:0] out); 
     wire [31:0][19:0] mem1;
     wire [31:0][19:0] mem2;
     assign mem1 = mem [31:0];
@@ -11,8 +38,8 @@ module LDC (input [63:0][19:0] mem, input [19:0] C, input[5:0] R, output wire [1
     assign sel = R [4:0];
 
     //wire [1:0][19:0] buffer;
-    //wire [19:0] buffer0;
-    //wire [19:0] buffer1;
+    wire [19:0] buffer0;
+    wire [19:0] buffer1;
     wire [19:0] buffer2;
     wire [19:0] buffer3;
     wire [19:0] buffer4;
@@ -56,17 +83,17 @@ module LDC (input [63:0][19:0] mem, input [19:0] C, input[5:0] R, output wire [1
     end
     */
 
+
     genvar i;
     generate
         for(i = 0; i < 20; i = i + 1)begin
-            assign buffer2[i] = !buffer0[i] & R[5];         
+            assign buffer2[i] = buffer0[i] & !R[5];         
             assign buffer3[i] = buffer1[i] & R[5];  
-            assign buffer4[i] = buffer2[i] || buffer3[i];       
-            $display("i=0%d, buffer2=%0d, buffer3=%0d, R[5]=%0d",i,buffer2[i],buffer0[i],R[5]);
+            assign buffer4[i] = buffer2[i] | buffer3[i];       
+            //$display("i=0%d, buffer2=%0d, buffer3=%0d, R[5]=%0d",i,buffer2[i],buffer0[i],R[5]);
             //$display("i=0%d, buffer3=%0d, buffer1=%0d, R[5]=%0d",i,buffer3[i],buffer1[i],R[5]);
         end
     endgenerate
-
 
 
     assign out = buffer4;
