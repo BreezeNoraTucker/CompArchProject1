@@ -34,17 +34,18 @@ endmodule
 
 module DEMUX (input [19:0] a, input [4:0] sel, output [31:0][19:0] out);
     genvar i;
-    integer idx;
+    //integer idx;
+    reg [31:0] curr; 
     always @(a) begin
         idx = $unsigned(sel);
-        $display("idx=%0d",idx);
+        //$display("idx=%0d",idx);
     end
     
     /*
-    assign z = 20'b00000000000000000000;
+    //assign z = 20'b00000000000000000000;
     generate
         for(i = 0; i < 32; i = i + 1)begin
-            assign out[i] = z;
+            curr[i] = i[19:0];
         end
     endgenerate
     */
